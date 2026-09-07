@@ -4,125 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Smart Cross-Sell Display</title>
+    <title>Smart Cross-Sell</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="store">
-
-        <!-- Store Header -->
-        <header class="store-header">
-            <h1>ABC FASHION STORE</h1>
-            <p>Smart Shopping Experience</p>
-        </header>
+    <header class="store-header">
+        <h1>ABC FASHION STORE</h1>
+        <p>Smart Shopping • Better Choices</p>
+    </header>
 
 
-        <!-- Main Product -->
-        <section class="main-product">
+    <main class="container">
 
-            <div class="product-image">
-                👕
-            </div>
+        <section class="product-section">
 
-            <div class="product-info">
+            <p id="productCategory" class="category">
+                FASHION
+            </p>
 
-                <span class="tag">FEATURED PRODUCT</span>
+            <h2 id="productName">
+                Navy Formal Shirt
+            </h2>
 
-                <h2>Navy Formal Shirt</h2>
+            <h3 id="productPrice">
+                ₹1,999
+            </h3>
 
-                <p class="price">₹1,999</p>
-
-                <p class="description">
-                    Premium cotton formal shirt suitable for office,
-                    meetings and special occasions.
-                </p>
-
-            </div>
+            <p id="productIdDisplay" class="product-id"></p>
 
         </section>
 
 
-        <!-- Cross Sell Section -->
-        <section class="recommendations">
+        <section class="recommendation-section">
 
-            <h2>Complete Your Look</h2>
+            <h2>✨ Complete Your Look</h2>
 
-            <p class="subtitle">
-                Recommended products that match your style
+            <p>
+                We found some products that go perfectly with your selection.
             </p>
 
 
-            <div class="products">
+            <div class="recommendations">
 
-                <!-- Product 1 -->
+
                 <div class="product-card">
 
-                    <div class="product-icon">
-                        👖
-                    </div>
+                    <div class="product-icon">👖</div>
 
                     <h3>Beige Formal Trouser</h3>
 
                     <p>₹2,499</p>
 
-                    <button onclick="addProduct('Beige Formal Trouser')">
+                    <button onclick="addProduct('Beige Formal Trouser', 2499)">
                         Add
                     </button>
 
                 </div>
 
 
-                <!-- Product 2 -->
+
                 <div class="product-card">
 
-                    <div class="product-icon">
-                        👞
-                    </div>
+                    <div class="product-icon">👞</div>
 
                     <h3>Brown Formal Shoes</h3>
 
                     <p>₹2,999</p>
 
-                    <button onclick="addProduct('Brown Formal Shoes')">
+                    <button onclick="addProduct('Brown Formal Shoes', 2999)">
                         Add
                     </button>
 
                 </div>
 
 
-                <!-- Product 3 -->
+
                 <div class="product-card">
 
-                    <div class="product-icon">
-                        🟤
-                    </div>
+                    <div class="product-icon">👔</div>
 
                     <h3>Leather Belt</h3>
 
                     <p>₹899</p>
 
-                    <button onclick="addProduct('Leather Belt')">
+                    <button onclick="addProduct('Leather Belt', 899)">
                         Add
                     </button>
 
                 </div>
 
 
-                <!-- Product 4 -->
+
                 <div class="product-card">
 
-                    <div class="product-icon">
-                        ⌚
-                    </div>
+                    <div class="product-icon">⌚</div>
 
                     <h3>Classic Silver Watch</h3>
 
                     <p>₹2,499</p>
 
-                    <button onclick="addProduct('Classic Silver Watch')">
+                    <button onclick="addProduct('Classic Silver Watch', 2499)">
                         Add
                     </button>
 
@@ -133,34 +117,26 @@
         </section>
 
 
-        <!-- Outfit Builder -->
         <section class="outfit-builder">
 
-            <h2>Build Your Outfit</h2>
-
-            <p>Select products you like</p>
+            <h2>🛍️ Your Outfit</h2>
 
             <div id="selectedProducts">
                 No products selected yet.
             </div>
 
             <button class="outfit-button" onclick="buildOutfit()">
-                BUILD MY OUTFIT
+                Build My Outfit
             </button>
 
         </section>
 
+    </main>
 
-        <!-- Footer -->
-        <footer>
 
-            <p>
-                Powered by Smart Cross-Sell
-            </p>
-
-        </footer>
-
-    </div>
+    <footer>
+        Smart Cross-Sell System • ABC Fashion Store
+    </footer>
 
 
     <script src="script.js"></script>
