@@ -236,13 +236,31 @@ let selectedProducts = [];
 
 function addProduct(name, price) {
 
+    const alreadyAdded = selectedProducts.some(function(product) {
+        return product.name === name;
+    });
+
+    if (alreadyAdded) {
+        alert("This product is already added to your outfit.");
+        return;
+    }
+
     selectedProducts.push({
         name: name,
         price: price
     });
 
     displaySelectedProducts();
+}
 
+
+function removeProduct(name) {
+
+    selectedProducts = selectedProducts.filter(function(product) {
+        return product.name !== name;
+    });
+
+    displaySelectedProducts();
 }
 
 
@@ -259,42 +277,43 @@ function displaySelectedProducts() {
         return;
     }
 
-
     let html = "";
-
     let total = 0;
-
 
     selectedProducts.forEach(function(product) {
 
         html += `
-            <div>
-                ${product.name}
-                — ₹${product.price.toLocaleString("en-IN")}
+            <div class="selected-product">
+
+                <div>
+                    <strong>${product.name}</strong>
+                    <br>
+                    ₹${product.price.toLocaleString("en-IN")}
+                </div>
+
+                <button onclick="removeProduct('${product.name}')">
+                    Remove
+                </button>
+
             </div>
         `;
 
         total += product.price;
-
     });
-
 
     html += `
         <hr>
-        <strong>
-            Total: ₹${total.toLocaleString("en-IN")}
-        </strong>
+
+        <div class="outfit-total">
+            <strong>
+                Total: ₹${total.toLocaleString("en-IN")}
+            </strong>
+        </div>
     `;
 
-
     container.innerHTML = html;
-
 }
 
-
-// ================================
-// Build Outfit
-// ================================
 
 function buildOutfit() {
 
@@ -303,14 +322,19 @@ function buildOutfit() {
         alert("Please add at least one product.");
 
         return;
-
     }
 
+    let total = 0;
+
+    selectedProducts.forEach(function(product) {
+        total += product.price;
+    });
 
     alert(
-        "Your outfit has been created! 🎉"
+        "🎉 Your outfit has been created!\n\n" +
+        "Products: " + selectedProducts.length +
+        "\nTotal: ₹" + total.toLocaleString("en-IN")
     );
-
 }
 
 
