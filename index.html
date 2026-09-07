@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Cross-Sell Display</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="store">
+
+        <!-- Store Header -->
+        <header class="store-header">
+            <h1>ABC FASHION STORE</h1>
+            <p>Smart Shopping Experience</p>
+        </header>
+
+
+        <!-- Main Product -->
+        <section class="main-product">
+
+            <div class="product-image">
+                👕
+            </div>
+
+            <div class="product-info">
+
+                <span class="tag">FEATURED PRODUCT</span>
+
+                <h2>Navy Formal Shirt</h2>
+
+                <p class="price">₹1,999</p>
+
+                <p class="description">
+                    Premium cotton formal shirt suitable for office,
+                    meetings and special occasions.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Cross Sell Section -->
+        <section class="recommendations">
+
+            <h2>Complete Your Look</h2>
+
+            <p class="subtitle">
+                Recommended products that match your style
+            </p>
+
+
+            <div class="products">
+
+                <!-- Product 1 -->
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        👖
+                    </div>
+
+                    <h3>Beige Formal Trouser</h3>
+
+                    <p>₹2,499</p>
+
+                    <button onclick="addProduct('Beige Formal Trouser')">
+                        Add
+                    </button>
+
+                </div>
+
+
+                <!-- Product 2 -->
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        👞
+                    </div>
+
+                    <h3>Brown Formal Shoes</h3>
+
+                    <p>₹2,999</p>
+
+                    <button onclick="addProduct('Brown Formal Shoes')">
+                        Add
+                    </button>
+
+                </div>
+
+
+                <!-- Product 3 -->
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        🟤
+                    </div>
+
+                    <h3>Leather Belt</h3>
+
+                    <p>₹899</p>
+
+                    <button onclick="addProduct('Leather Belt')">
+                        Add
+                    </button>
+
+                </div>
+
+
+                <!-- Product 4 -->
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        ⌚
+                    </div>
+
+                    <h3>Classic Silver Watch</h3>
+
+                    <p>₹2,499</p>
+
+                    <button onclick="addProduct('Classic Silver Watch')">
+                        Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Outfit Builder -->
+        <section class="outfit-builder">
+
+            <h2>Build Your Outfit</h2>
+
+            <p>Select products you like</p>
+
+            <div id="selectedProducts">
+                No products selected yet.
+            </div>
+
+            <button class="outfit-button" onclick="buildOutfit()">
+                BUILD MY OUTFIT
+            </button>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <p>
+                Powered by Smart Cross-Sell
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
