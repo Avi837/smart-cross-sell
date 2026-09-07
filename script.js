@@ -325,16 +325,63 @@ function buildOutfit() {
     }
 
     let total = 0;
+    let items = "";
 
     selectedProducts.forEach(function(product) {
+
         total += product.price;
+
+        items += `
+            <div class="summary-item">
+                <span>${product.name}</span>
+                <strong>₹${product.price.toLocaleString("en-IN")}</strong>
+            </div>
+        `;
     });
 
-    alert(
-        "🎉 Your outfit has been created!\n\n" +
-        "Products: " + selectedProducts.length +
-        "\nTotal: ₹" + total.toLocaleString("en-IN")
-    );
+    const summary = `
+        <div class="outfit-summary">
+
+            <h2>🎉 Your Outfit is Ready!</h2>
+
+            <p class="summary-subtitle">
+                Your selected products
+            </p>
+
+            <div class="summary-items">
+                ${items}
+            </div>
+
+            <div class="summary-total">
+                Total Outfit Value:
+                <strong>₹${total.toLocaleString("en-IN")}</strong>
+            </div>
+
+            <button onclick="closeSummary()">
+                Continue Shopping
+            </button>
+
+        </div>
+    `;
+
+    const overlay = document.createElement("div");
+
+    overlay.id = "outfitSummaryOverlay";
+
+    overlay.innerHTML = summary;
+
+    document.body.appendChild(overlay);
+}
+
+
+function closeSummary() {
+
+    const overlay =
+        document.getElementById("outfitSummaryOverlay");
+
+    if (overlay) {
+        overlay.remove();
+    }
 }
 
 
