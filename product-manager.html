@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Smart Cross-Sell - Product Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         * {
@@ -296,6 +297,13 @@
 
 
     <script>
+        const SUPABASE_URL = "https://omqcfqmrnrpznbdxbcct.supabase.co";
+const SUPABASE_KEY = "sb_publishable_NSzQqPs7CibtCvxGCZ2jKA_yhYYHyn7";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
         // Load saved products
         let savedProducts =
@@ -308,83 +316,111 @@
         // SAVE PRODUCT
         // =========================
 
-        function saveProduct() {
+        async function saveProduct() {
 
-            const name =
-                document.getElementById("productName").value.trim();
+    const name =
+        document.getElementById("productName").value.trim();
 
-            const id =
-                document.getElementById("productId").value.trim();
+    const id =
+        document.getElementById("productId").value.trim();
 
-            const price =
-                document.getElementById("price").value.trim();
+    const price =
+        document.getElementById("price").value.trim();
 
-            const category =
-                document.getElementById("category").value;
-
-
-            if (!name || !id || !price) {
-
-                alert(
-                    "Please fill Product Name, Product ID and Price."
-                );
-
-                return;
-            }
+    const category =
+        document.getElementById("category").value;
 
 
-            // Check duplicate ID
+    if (!name || !id || !price) {
 
-            const existing =
-                savedProducts.find(
-                    product => product.id === id
-                );
+        alert(
+            "Please fill Product Name, Product ID and Price."
+        );
 
-
-            if (existing) {
-
-                alert(
-                    "This Product ID already exists."
-                );
-
-                return;
-            }
+        return;
+    }
 
 
-            const product = {
-
-                name: name,
-
-                id: id,
-
-                price: Number(price),
-
-                category: category
-
-            };
+    // Check duplicate ID in current browser
+    const existing =
+        savedProducts.find(
+            product => product.id === id
+        );
 
 
-            savedProducts.push(product);
+    if (existing) {
+
+        alert(
+            "This Product ID already exists."
+        );
+
+        return;
+    }
 
 
-            localStorage.setItem(
-                "smartProducts",
-                JSON.stringify(savedProducts)
-            );
+    // Save product to Supabase
+    const { data, error } =
+        await supabaseClient
+            .from("products")
+            .insert([
+                {
+                    product_id: id,
+                    name: name,
+                    price: Number(price),
+                    category: category
+                }
+            ])
+            .select();
 
 
-            alert(
-                "Product saved successfully! ✅"
-            );
+    if (error) {
+
+        console.error("Supabase Error:", error);
+
+        alert(
+            "Product could not be saved to database ❌\n\n" +
+            error.message
+        );
+
+        return;
+    }
 
 
-            clearForm();
+    // Product object for display
+    const product = {
 
-            displayProducts();
+        name: name,
 
-            generateQR(product);
+        id: id,
 
-        }
+        price: Number(price),
+
+        category: category
+
+    };
+
+
+    // Keep current page working
+    savedProducts.push(product);
+
+    localStorage.setItem(
+        "smartProducts",
+        JSON.stringify(savedProducts)
+    );
+
+
+    alert(
+        "Product saved to Supabase successfully! ✅"
+    );
+
+
+    clearForm();
+
+    displayProducts();
+
+    generateQR(product);
+
+}
 
 
         // =========================
