@@ -89,20 +89,76 @@ const products = {
 // Read Product ID from QR URL
 // ================================
 
-function loadProduct() {
+async function loadProduct() {
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+        new URLSearchParams(window.location.search);
 
-    const productId = params.get("product");
+    const productId =
+        params.get("product");
+
 
     // If no Product ID exists
     if (!productId) {
+
         showProduct("SHIRT001");
+
         return;
     }
 
-    // If Product ID exists
-    if (products[productId]) {
+
+    // Get product from Supabase
+    const { data, error } =
+        await supabaseClient
+            .from("products")
+            .select("*")
+            .eq("product_id", productId)
+            .single();
+
+
+    // If database error
+    if (error) {
+
+        console.error("Supabase Error:", error);
+
+        // Fallback to existing product system
+        if (products[productId]) {
+
+            showProduct(productId);
+
+        } else {
+
+            showProduct("SHIRT001");
+
+        }
+
+        return;
+    }
+
+
+    // Product found in Supabase
+    if (data) {
+
+        // Keep existing recommendations
+        // from our recommendation system
+        const existingProduct =
+            products[productId];
+
+        products[productId] = {
+
+            name: data.name,
+
+            price: Number(data.price),
+
+            category: data.category,
+
+            recommendations:
+                existingProduct
+                    ? existingProduct.recommendations
+                    : []
+
+        };
+
 
         showProduct(productId);
 
@@ -113,7 +169,6 @@ function loadProduct() {
     }
 
 }
-
 
 // ================================
 // Show Product
