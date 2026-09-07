@@ -8,19 +8,78 @@ const products = {
     SHIRT001: {
         name: "Navy Formal Shirt",
         price: 1999,
-        category: "Fashion"
+        category: "Fashion",
+
+        recommendations: [
+            {
+                name: "Beige Formal Trouser",
+                price: 2499,
+                icon: "👖"
+            },
+            {
+                name: "Brown Formal Shoes",
+                price: 2999,
+                icon: "👞"
+            },
+            {
+                name: "Leather Belt",
+                price: 899,
+                icon: "👔"
+            },
+            {
+                name: "Classic Silver Watch",
+                price: 2499,
+                icon: "⌚"
+            }
+        ]
     },
 
     SHIRT002: {
         name: "White Casual Shirt",
         price: 1799,
-        category: "Fashion"
+        category: "Fashion",
+
+        recommendations: [
+            {
+                name: "Blue Denim Jeans",
+                price: 2299,
+                icon: "👖"
+            },
+            {
+                name: "White Sneakers",
+                price: 2999,
+                icon: "👟"
+            },
+            {
+                name: "Casual Belt",
+                price: 799,
+                icon: "👔"
+            }
+        ]
     },
 
     SHIRT003: {
         name: "Black Premium Shirt",
         price: 2299,
-        category: "Fashion"
+        category: "Fashion",
+
+        recommendations: [
+            {
+                name: "Black Formal Trouser",
+                price: 2699,
+                icon: "👖"
+            },
+            {
+                name: "Black Leather Shoes",
+                price: 3499,
+                icon: "👞"
+            },
+            {
+                name: "Premium Black Watch",
+                price: 3999,
+                icon: "⌚"
+            }
+        ]
     }
 
 };
@@ -75,6 +134,40 @@ function showProduct(productId) {
 
     document.getElementById("productIdDisplay").textContent =
         "Product ID: " + productId;
+
+
+    const recommendationContainer =
+        document.querySelector(".recommendations");
+
+    recommendationContainer.innerHTML = "";
+
+
+    product.recommendations.forEach(function(item) {
+
+        const card = document.createElement("div");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <div class="product-icon">${item.icon}</div>
+
+            <h3>${item.name}</h3>
+
+            <p>₹${item.price.toLocaleString("en-IN")}</p>
+
+            <button>Add</button>
+        `;
+
+        card.querySelector("button").addEventListener(
+            "click",
+            function() {
+                addProduct(item.name, item.price);
+            }
+        );
+
+        recommendationContainer.appendChild(card);
+
+    });
 
 }
 
